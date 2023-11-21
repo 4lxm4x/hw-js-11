@@ -26,17 +26,10 @@ refs.loadMoreBtn.addEventListener('click', loadMore);
 
 async function onSearch(event) {
   event.preventDefault();
-  // hideLoadMoreButton();
-  // endOfResultsElement.remove();
-  //   console.log(event.currentTarget);
   page = 1;
   const request = refs.inputEl.value;
-  // refs.loadMoreBtn.classList.remove('enabled');
-  // refs.loadMoreBtn.disabled = true;
 
   const response = await fetchPics(request, page);
-  // console.log(response.data);
-  // console.log(response.data.hits);
   if (response.data.hits[0] == undefined) {
     Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
@@ -44,7 +37,6 @@ async function onSearch(event) {
     return;
   }
   refs.galleryDiv.innerHTML = '';
-  // document.querySelector('.frame').innerHTML = '';
   console.log(response.data.totalHits);
   renderGallery(response.data.hits);
   const lightbox = new SimpleLightbox('.gallery a', {
@@ -57,16 +49,10 @@ async function onSearch(event) {
 
 async function loadMore(event) {
   event.preventDefault();
-  // lightbox.refresh();
+
   page++;
-  //   console.log(event.currentTarget);
 
   const request = refs.inputEl.value;
-  // hideLoadMoreButton();
-  // document.querySelector('.frame').classList.add('frame-off');
-
-  // refs.loadMoreBtn.classList.remove('enabled');
-  // refs.loadMoreBtn.disabled = true;
 
   const response = await fetchPics(request, page);
   if (response.data.hits[0] == undefined) {
@@ -78,15 +64,6 @@ async function loadMore(event) {
   console.log(response.data.hits);
   renderGallery(response.data.hits);
   checkForEndOfResults(response.data.totalHits);
-  // if (
-  //   document.querySelector('ul').childElementCount === response.data.totalHits
-  // ) {
-  //   refs.bodyEl.append(endOfResultsElement);
-  // } else {
-  //   document.querySelector('.frame').classList.remove('frame-off');
-  //   refs.loadMoreBtn.classList.add('enabled');
-  //   refs.loadMoreBtn.disabled = false;
-  // }
 }
 
 function renderGallery(arrayOfData) {
@@ -137,9 +114,6 @@ function checkForEndOfResults(totalHits) {
   } else {
     showLoadMoreButton();
     endOfResultsElement.remove();
-    // document.querySelector('.frame').classList.remove('frame-off');
-    // refs.loadMoreBtn.classList.add('enabled');
-    // refs.loadMoreBtn.disabled = false;
   }
 }
 

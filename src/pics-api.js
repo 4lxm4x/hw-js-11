@@ -15,38 +15,13 @@ export default async function fetchPics(request, page) {
           image_type: 'photo',
           orientation: 'horizontal',
           safesearch: true,
-          per_page: 100,
+          per_page: 40,
           page: page,
         },
       }
     );
-    //console.log(response);
     return response;
   } catch {
     console.error('error');
   }
 }
-
-// export async function fetchMorePics(request, page) {
-//   try {
-//     const response = await axios.get(
-//       'https://pixabay.com/api/',
-
-//       {
-//         params: {
-//           q: `${request.split(' ').join('+')}`,
-//           key: KEY,
-//           image_type: 'photo',
-//           orientation: 'horizontal',
-//           safesearch: true,
-//           per_page: 40,
-//           page: page,
-//         },
-//       }
-//     );
-//     //console.log(response);
-//     return response;
-//   } catch {
-//     console.error('error');
-//   }
-// }
