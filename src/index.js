@@ -7,6 +7,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import simpleLightbox from 'simplelightbox';
 let page;
 let pagesPerRequest;
+let lightbox;
 const refs = {
   searchBtn: document.querySelector('.btn-search'),
   inputEl: document.querySelector('.input-search'),
@@ -28,7 +29,6 @@ async function onSearch(event) {
   event.preventDefault();
   page = 1;
   const request = refs.inputEl.value;
-
   const response = await fetchPics(request, page);
   if (response.data.hits[0] == undefined) {
     Notify.failure(
@@ -36,10 +36,10 @@ async function onSearch(event) {
     );
     return;
   }
+  Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
   refs.galleryDiv.innerHTML = '';
-  console.log(response.data.totalHits);
   renderGallery(response.data.hits);
-  const lightbox = new SimpleLightbox('.gallery a', {
+  lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     captionDelay: 250,
   });
@@ -49,11 +49,8 @@ async function onSearch(event) {
 
 async function loadMore(event) {
   event.preventDefault();
-
   page++;
-
   const request = refs.inputEl.value;
-
   const response = await fetchPics(request, page);
   if (response.data.hits[0] == undefined) {
     Notify.failure(
@@ -61,8 +58,17 @@ async function loadMore(event) {
     );
     return;
   }
-  console.log(response.data.hits);
+
   renderGallery(response.data.hits);
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 1.5,
+    behavior: 'smooth',
+  });
+  lightbox.refresh();
   checkForEndOfResults(response.data.totalHits);
 }
 
