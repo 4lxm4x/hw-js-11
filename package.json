@@ -22,9 +22,14 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
+    "axios": "^1.6.2",
+    "buffer": "^6.0.3",
+    "notiflix": "^3.2.6",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
-    "posthtml-include": "^1.7.4"
+    "posthtml-include": "^1.7.4",
+    "simplelightbox": "^2.14.2"
   },
-  "browserslist": "> 0.5%, last 2 versions, not dead"
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "content_security_policy": "default-src 'self' style-src 'self' 'unsafe-inline';"
 }
