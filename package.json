@@ -2,7 +2,7 @@
   "name": "parcel-project-template",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://github.com/4lxm4x/hw-js-11",
+  "homepage": "https://4lxm4x.github.io/hw-js-11/",
   "scripts": {
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /hw-js-11/"
